@@ -1,14 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.controllers.NarudzbaController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="915.0" prefWidth="1287.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="173.0" prefWidth="1287.0" style="-fx-background-color: #2D75E8;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1073.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/peoplee.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="816.0" layoutY="39.0" prefHeight="35.0" prefWidth="257.0" text="Default name">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="816.0" layoutY="98.0" prefHeight="35.0" prefWidth="172.0" text="Default role">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="123.0" layoutY="52.0" text="POS - JavaFX" textFill="WHITE">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Label layoutX="136.0" layoutY="105.0" text="Point of sale" textFill="WHITE">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <GridPane layoutY="174.0" prefHeight="740.0" prefWidth="212.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" prefHeight="211.0" prefWidth="212.0" text="Topli napitci" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="185.0" prefWidth="568.0" text="Gazirana pića" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="185.0" prefWidth="325.0" text="Negazirana pića" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="185.0" prefWidth="648.0" text="Alkoholna pića" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="148.0" prefWidth="699.0" text="Najčešći artikli" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="212.0" layoutY="170.0" prefHeight="740.0" prefWidth="694.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <MenuButton layoutX="927.0" layoutY="174.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="360.0" text="Narudžba">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Narudžba 1" />
+          <MenuItem mnemonicParsing="false" text="Narudžba 2" />
+            <MenuItem mnemonicParsing="false" text="Narudžba 3" />
+        </items>
+      </MenuButton>
+      <TableView layoutX="928.0" layoutY="205.0" prefHeight="490.0" prefWidth="360.0">
+        <columns>
+          <TableColumn prefWidth="109.0" text="Artikl" />
+          <TableColumn prefWidth="116.0" text="Količina" />
+            <TableColumn minWidth="0.0" prefWidth="106.0" text="Cijena" />
+        </columns>
+      </TableView>
+   </children>
 </AnchorPane>

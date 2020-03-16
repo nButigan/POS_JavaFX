@@ -35,6 +35,9 @@ public class LoginController implements Initializable {
     @FXML
     private Button btnSignin;
 
+    @FXML
+    private Button btnSignup;
+
     /// --
     Connection con = null;
     PreparedStatement preparedStatement = null;
@@ -80,6 +83,23 @@ public class LoginController implements Initializable {
                 }
             }
         }
+
+        if(event.getSource() == btnSignup){
+            try {
+
+
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.setMaximized(false);
+                stage.close();
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/sample/views/Registracija.fxml")));
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
     }
 
     @Override
@@ -121,7 +141,7 @@ public class LoginController implements Initializable {
                     setLblError(Color.GREEN, "Login Successful for " + korisnickoIme+" as admin..Redirecting..");
                     status = "Success Admin";
                 } else {
-                    setLblError(Color.GREEN, "Login Successful for " +korisnickoIme+" as radnik..Redirecting..");
+                    setLblError(Color.GREEN, "Login Successful for " +korisnickoIme+" as konobar..Redirecting..");
                 }
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());

@@ -40,7 +40,7 @@ public class AdminViewController implements Initializable {
     private void handleButtonClicks(javafx.event.ActionEvent mouseEvent) {
         if (mouseEvent.getSource() == btnNarudzba) {
             closeCurrentWindows(mouseEvent);
-            loadStage("/sample/views/Item.fxml");
+            loadStage("/sample/views/Narudzba.fxml");
         } else if (mouseEvent.getSource() == btnStorno) {
             closeCurrentWindows(mouseEvent);
             loadStage("/sample/views/Storno.fxml");
