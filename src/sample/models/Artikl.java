@@ -26,7 +26,8 @@ public class Artikl {
     private Image slika;
     private String kategorija;
 
-    public Artikl(String naziv, String dobavljac, float cijena, Image slika, String kategorija) {
+    public Artikl(int id, String naziv, String dobavljac, float cijena, Image slika, String kategorija) {
+        this.id = id;
         this.naziv = naziv;
         this.dobavljac = dobavljac;
         this.cijena = cijena;
@@ -34,32 +35,52 @@ public class Artikl {
         this.kategorija = kategorija;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNaziv() {
         return naziv;
     }
 
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+
     public String getDobavljac() {
         return dobavljac;
+    }
+
+    public void setDobavljac(String dobavljac) {
+        this.dobavljac = dobavljac;
     }
 
     public float getCijena() {
         return cijena;
     }
 
+    public void setCijena(float cijena) {
+        this.cijena = cijena;
+    }
+
     public Image getSlika() {
         return slika;
     }
 
+    public void setSlika(Image slika) {
+        this.slika = slika;
+    }
+
     public String getKategorija() {
         return kategorija;
+    }
+
+    public void setKategorija(String kategorija) {
+        this.kategorija = kategorija;
     }
 
     public static Artikl add(Artikl a){
@@ -141,11 +162,12 @@ public class Artikl {
                 }
 
                 articles.add(new Artikl(
-                        rs.getString(1),
+                        rs.getInt(1),
                         rs.getString(2),
-                        rs.getFloat(3),
+                        rs.getString(3),
+                        rs.getFloat(4),
                         fxSlika,
-                        rs.getString(5)
+                        rs.getString(6)
 
                 ));
             }
@@ -154,6 +176,40 @@ public class Artikl {
             System.out.println("Nisam uspio izvuci artikle iz baze: " + e.getMessage());
             return null;
         }
+    }
+
+    public static List<Artikl> readByCategory(String kategorija){
+        ObservableList<Artikl> articles = FXCollections.observableArrayList();;
+        try {
+            Statement stmnt = ConnectionUtil.conDB().createStatement();
+            ResultSet rs = stmnt.executeQuery("SELECT * FROM artikl WHERE kategorija='" + kategorija + "'");
+
+
+            while(rs.next()){
+                Image fxSlika = null;
+                try {
+                    BufferedImage bImage = ImageIO.read(rs.getBinaryStream(5));
+                    fxSlika = SwingFXUtils.toFXImage(bImage, null);
+                } catch (NullPointerException | IOException ex) {
+                    fxSlika = null;
+                }
+
+                articles.add(new Artikl(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getFloat(4),
+                        fxSlika,
+                        rs.getString(6)
+
+                ));
+            }
+            return articles;
+        } catch (SQLException e) {
+            System.out.println("Nisam uspio izvuci artikle iz baze: " + e.getMessage());
+            return null;
+        }
+
     }
 
 }

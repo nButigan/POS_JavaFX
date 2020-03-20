@@ -19,12 +19,18 @@ public class Korisnik {
    private int uloga;
    private String sifra;
 
-    public Korisnik(String ime, String prezime, String korisnickoIme, String sifra) {
+    public Korisnik(int ID, String ime, String prezime, String korisnickoIme, String sifra) {
+        this.ID = ID;
         this.ime = ime;
         this.prezime = prezime;
         this.korisnickoIme = korisnickoIme;
         this.uloga = 0;
         this.sifra = sifra;
+    }
+
+    public Korisnik(String korisnickoIme, int uloga){
+        this.korisnickoIme = korisnickoIme;
+        this.uloga = uloga;
     }
 
     public int getID() {
@@ -51,6 +57,30 @@ public class Korisnik {
         return sifra;
     }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public void setIme(String ime) {
+        this.ime = ime;
+    }
+
+    public void setPrezime(String prezime) {
+        this.prezime = prezime;
+    }
+
+    public void setKorisnickoIme(String korisnickoIme) {
+        this.korisnickoIme = korisnickoIme;
+    }
+
+    public void setUloga(int uloga) {
+        this.uloga = uloga;
+    }
+
+    public void setSifra(String sifra) {
+        this.sifra = sifra;
+    }
+
     public static boolean add(Korisnik noviKorisnik){
         try{
             PreparedStatement stmnt = ConnectionUtil.conDB().prepareStatement("INSERT INTO korisnik VALUES (null, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
@@ -60,6 +90,8 @@ public class Korisnik {
             stmnt.setInt(4, noviKorisnik.getUloga());
             stmnt.setString(5, noviKorisnik.getSifra());
             stmnt.executeUpdate();
+
+
             return true;
 
         } catch (SQLException e){
@@ -98,11 +130,11 @@ public class Korisnik {
 
             while(rs.next()){
                 users.add(new Korisnik(
-                        //rs.getInt(1),
-                        rs.getString(1),
+                        rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getString(4)
+                        rs.getString(4),
+                        rs.getString(5)
                 ));
             }
             return users;

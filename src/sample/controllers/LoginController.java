@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import sample.models.Korisnik;
 import utils.ConnectionUtil;
 
 
@@ -38,10 +39,21 @@ public class LoginController implements Initializable {
     @FXML
     private Button btnSignup;
 
-    /// --
+    private String name;
+    private int uloga;
+
+
     Connection con = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
+
+    public String getName() {
+        return name;
+    }
+
+    public int getUloga() {
+        return uloga;
+    }
 
     @FXML
     public void handleButtonAction(MouseEvent event) {
@@ -75,6 +87,7 @@ public class LoginController implements Initializable {
                     stage.setMaximized(true);
                     stage.close();
                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/sample/views/RadnikView.fxml")));
+                    stage.setTitle("Konobar");
                     stage.setScene(scene);
                     stage.show();
 
@@ -138,10 +151,16 @@ public class LoginController implements Initializable {
                     setLblError(Color.TOMATO, "Enter Correct Email/Password");
                     status = "Error";
                 } else if(resultSet.getInt("uloga") == 1) {
-                    setLblError(Color.GREEN, "Login Successful for " + korisnickoIme+" as admin..Redirecting..");
+                    setLblError(Color.GREEN, "Login Successful for " + korisnickoIme+" as administrator..Redirecting..");
+                    this.uloga = 1;
+                    this.name = korisnickoIme;
+                    Korisnik logiraniKorisnik = new Korisnik(name,1);
+                    NarudzbaController.logiraniKorisnik = logiraniKorisnik;
                     status = "Success Admin";
                 } else {
                     setLblError(Color.GREEN, "Login Successful for " +korisnickoIme+" as konobar..Redirecting..");
+                    this.uloga = 0;
+                    this.name = korisnickoIme;
                 }
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());

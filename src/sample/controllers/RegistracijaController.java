@@ -53,7 +53,7 @@ public class RegistracijaController implements Initializable {
             String prezime = txtPrezime.getText();
             String kIme = txtKorisnickoIme.getText();
             String sifra = txtSifra.getText();
-            Korisnik korisnik = new Korisnik(ime, prezime, kIme, sifra);
+            Korisnik korisnik = new Korisnik(0,ime, prezime, kIme, sifra);
             if(Korisnik.add(korisnik)) {
 
                 lblErrors.setTextFill(Color.GREEN);
