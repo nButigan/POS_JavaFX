@@ -28,9 +28,20 @@ public class Korisnik {
         this.sifra = sifra;
     }
 
-    public Korisnik(String korisnickoIme, int uloga){
+
+    public Korisnik( String korisnickoIme, int uloga){
         this.korisnickoIme = korisnickoIme;
         this.uloga = uloga;
+        this.ID=getIdOfLogiraniKorisnik();
+    }
+
+    public Korisnik(int ID, String ime, String prezime, String korisnickoIme,int uloga, String sifra) {
+        this.ID = ID;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.korisnickoIme = korisnickoIme;
+        this.uloga = uloga;
+        this.sifra = sifra;
     }
 
     public int getID() {
@@ -102,12 +113,13 @@ public class Korisnik {
 
     public static boolean update(Korisnik postojeciKorisnik){
         try {
-            PreparedStatement stmnt = ConnectionUtil.conDB().prepareStatement("UPDATE korisnik SET ime=?, prezime=?, korisnickoIme=?, uloga=?, sifra=?,  WHERE id=?");
+            PreparedStatement stmnt = ConnectionUtil.conDB().prepareStatement("UPDATE korisnik SET ime=?, prezime=?, korisnickoIme=?, uloga=?, sifra=?  WHERE id=?");
             stmnt.setString(1, postojeciKorisnik.getIme());
             stmnt.setString(2, postojeciKorisnik.getPrezime());
             stmnt.setString(3, postojeciKorisnik.getKorisnickoIme());
             stmnt.setInt(4, postojeciKorisnik.getUloga());
             stmnt.setString(5, postojeciKorisnik.getSifra());
+            stmnt.setInt(6,postojeciKorisnik.getID());
             stmnt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -117,8 +129,16 @@ public class Korisnik {
 
     }
 
-    public static void remove(Korisnik postojeciKorisnik){
-
+    public static boolean remove(Korisnik postojeciKorisnik){
+        try {
+            PreparedStatement stmnt = ConnectionUtil.conDB().prepareStatement("DELETE FROM korisnik WHERE id=?");
+            stmnt.setInt(1, postojeciKorisnik.getID());
+            stmnt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Nisam uspio pobrisati korisnika: " + e.getMessage());
+            return false;
+        }
     }
 
     public static List<Korisnik> readAll(){
@@ -134,13 +154,32 @@ public class Korisnik {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getString(5)
+                        rs.getInt(5),
+                        rs.getString(6)
                 ));
             }
             return users;
         } catch (SQLException e) {
             System.out.println("Neuspješno čitanje korisnika iz baze: " + e.getMessage());
             return users;
+        }
+    }
+
+    public int getIdOfLogiraniKorisnik(){
+        int id=0;
+        try{
+            Statement stmnt = ConnectionUtil.conDB().createStatement();
+            ResultSet rs = stmnt.executeQuery("SELECT id FROM korisnik WHERE korisnickoIme='" + this.korisnickoIme + "'");
+            while(rs.next()) {
+                 id = rs.getInt("id");
+            }
+
+
+            return id;
+
+        } catch (SQLException e){
+            System.out.println("Neuspješno čitanje ID-a korisnika: " + e.getMessage());
+            return -1;
         }
     }
 }

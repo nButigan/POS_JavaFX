@@ -18,16 +18,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import sample.models.Artikl;
-import sample.models.Item;
-import sample.models.Korisnik;
+import sample.models.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.*;
 
 public class NarudzbaController implements Initializable {
 
@@ -100,6 +99,7 @@ public class NarudzbaController implements Initializable {
     float zaPlatit=0;
     String name;
     static Korisnik logiraniKorisnik;
+    Item i1;
 
 
     @Override
@@ -147,12 +147,17 @@ public class NarudzbaController implements Initializable {
             txtKolicina.setText(String.valueOf(kolicina));
         }
 
-        else if (event.getSource() == btnIzbrisi) {
-
-        }
-
         else if (event.getSource() == btnIspisi) {
-
+            int dodaniProizvodiSize = dodaniProizvodi.size();
+            Date date = new Date(System.currentTimeMillis());
+            int idKorisnik = logiraniKorisnik.getID();
+            Racun racun = new Racun(date,idKorisnik);
+            Racun.add(racun);
+            for(int i=0; i < dodaniProizvodiSize; i++) {
+                String nazivArtikla = dodaniProizvodi.get(i).getName();
+                ArtiklRacun artiklRacun = new ArtiklRacun(0, racun.getId(),ArtiklRacun.getArtiklId(nazivArtikla),dodaniProizvodi.get(i).getQuantity());
+                ArtiklRacun.add(artiklRacun);
+            }
         }
 
         else if (event.getSource() == btnPrebaci) {
@@ -160,7 +165,9 @@ public class NarudzbaController implements Initializable {
         }
 
         else if (event.getSource() == btnPovratak) {
-            try {
+            if(logiraniKorisnik.getUloga() == 1)
+            {
+                try {
                 Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
                 stage.setMaximized(false);
@@ -171,6 +178,20 @@ public class NarudzbaController implements Initializable {
 
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
+            }
+            } else {
+                try {
+                    Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    stage.setMaximized(false);
+                    stage.close();
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/sample/views/RadnikView.fxml")));
+                    stage.setScene(scene);
+                    stage.show();
+
+                } catch (IOException ex) {
+                    System.err.println(ex.getMessage());
+                }
             }
         }
 
@@ -195,7 +216,7 @@ public class NarudzbaController implements Initializable {
                 public void handle(ActionEvent event) {
                     odabraniProizvodi.add(a);
 
-                    Item i1 = new Item(a.getNaziv(), 1, a.getCijena());
+                    /*Item*/ i1 = new Item(a.getNaziv(), 1, a.getCijena());
                     if (map.get(a.getId()) != null) {
                         i1 = map.get(a.getId());
                         i1.setQuantity(i1.getQuantity() + 1);
@@ -215,9 +236,46 @@ public class NarudzbaController implements Initializable {
                             txtKolicina.setText(String.valueOf(TVRacun.getSelectionModel().getSelectedItem().getQuantity()));
                         }
                     });
+                    btnPlus.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            i1.setQuantity(Integer.parseInt(txtKolicina.getText())+1);
+                            System.out.println(i1.getQuantity());
+                            i1.setPrice(i1.getQuantity()*a.getCijena());
+                            System.out.println(i1.getPrice());
+                            TVRacun.refresh();
+                            zaPlatit = zaPlatit + a.getCijena();
+                            txtUkupnoZaPlatit.setText(String.valueOf(zaPlatit));
+                        }
+                    });
+
+                    btnMinus.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            i1.setQuantity(Integer.parseInt(txtKolicina.getText())-1);
+                            System.out.println(i1.getQuantity());
+                            i1.setPrice(i1.getQuantity()*a.getCijena());
+                            System.out.println(i1.getPrice());
+                            TVRacun.refresh();
+                            zaPlatit = zaPlatit - a.getCijena();
+                            txtUkupnoZaPlatit.setText(String.valueOf(zaPlatit));
+                        }
+                    });
+
+                    btnIzbrisi.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            dodaniProizvodi.remove(i1);
+                            map.remove(a.getId());
+                            TVRacun.refresh();
+                            zaPlatit -= i1.getPrice();
+                            txtUkupnoZaPlatit.setText(String.valueOf(zaPlatit));
+                        }
+                    });
+
+
                 }
             });
-            GPArtikliTablica.getChildren().removeAll();
             GPArtikliTablica.add(btn, i, j);
             i++;
             if (i >= 4) {

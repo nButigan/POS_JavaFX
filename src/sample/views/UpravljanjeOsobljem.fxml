@@ -1,14 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.controllers.UpravljanjeOsobljemController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="768.0" prefWidth="1287.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.UpravljanjeOsobljemController">
+   <children>
+      <Pane prefHeight="173.0" prefWidth="1287.0" style="-fx-background-color: #2D75E8;" AnchorPane.bottomAnchor="595.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1073.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/peoplee.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblImeKorisnika" layoutX="816.0" layoutY="39.0" prefHeight="35.0" prefWidth="257.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblUlogaKorisnika" layoutX="816.0" layoutY="98.0" prefHeight="35.0" prefWidth="172.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="123.0" layoutY="52.0" text="POS - JavaFX" textFill="WHITE">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Label layoutX="136.0" layoutY="105.0" text="Point of sale" textFill="WHITE">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <TableView fx:id="TVradnik" layoutY="173.0" onMouseClicked="#odaberiKorisnika" prefHeight="594.0" prefWidth="648.0">
+        <columns>
+          <TableColumn fx:id="colIme" prefWidth="118.0" text="Ime" />
+          <TableColumn fx:id="colPrezime" prefWidth="160.0" text="Prezime" />
+            <TableColumn fx:id="colKorisnickoIme" prefWidth="143.0" text="Korisničko ime" />
+            <TableColumn fx:id="colUloga" prefWidth="100.0" text="Uloga" />
+            <TableColumn fx:id="colSifra" prefWidth="124.0" text="Šifra" />
+        </columns>
+      </TableView>
+      <Label layoutX="668.0" layoutY="207.0" text="Ime" />
+      <Label layoutX="667.0" layoutY="289.0" text="Prezime" />
+      <Label layoutX="667.0" layoutY="374.0" text="Korisničko ime" />
+      <Label layoutX="666.0" layoutY="454.0" text="Šifra" />
+      <Label layoutX="672.0" layoutY="537.0" text="Uloga" />
+      <TextField fx:id="txtIme" layoutX="668.0" layoutY="242.0" />
+      <TextField fx:id="txtPrezime" layoutX="667.0" layoutY="327.0" />
+      <TextField fx:id="txtKorisnickoIme" layoutX="667.0" layoutY="403.0" />
+      <TextField fx:id="txtSifra" layoutX="667.0" layoutY="485.0" />
+      <RadioButton fx:id="radioAdmin" layoutX="673.0" layoutY="579.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="107.0" text="Admin" />
+      <RadioButton fx:id="radioKonobar" layoutX="676.0" layoutY="624.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="107.0" text="Konobar" />
+      <Button fx:id="btnSpremi" layoutX="867.0" layoutY="681.0" mnemonicParsing="false" onAction="#spremiPromjene" prefHeight="60.0" prefWidth="135.0" text="Spremi" />
+      <Button fx:id="btnNazad" layoutX="1092.0" layoutY="681.0" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="60.0" prefWidth="135.0" text="Nazad" />
+      <Button fx:id="btnIzbrisi" layoutX="666.0" layoutY="681.0" mnemonicParsing="false" onAction="#izbrisiKorisnika" prefHeight="60.0" prefWidth="135.0" text="Izbriši korisnika" textAlignment="CENTER" />
+      <Label layoutX="1008.0" layoutY="273.0" prefHeight="21.0" prefWidth="79.0" text="1 - Admin ">
+         <font>
+            <Font name="Arial Unicode MS" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="1008.0" layoutY="242.0" text="0 - Konobar">
+         <font>
+            <Font name="Arial Unicode MS" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblObavjest" layoutX="667.0" layoutY="182.0" prefHeight="17.0" prefWidth="163.0" />
+   </children>
 </AnchorPane>

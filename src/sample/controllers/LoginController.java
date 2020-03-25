@@ -69,7 +69,7 @@ public class LoginController implements Initializable {
                     stage.setMaximized(false);
                     stage.close();
                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/sample/views/AdminView.fxml")));
-                    stage.setTitle("Admin");
+                    stage.setTitle("Administrator");
                     stage.setScene(scene);
                     stage.show();
 
@@ -84,7 +84,7 @@ public class LoginController implements Initializable {
 
                     Node node = (Node) event.getSource();
                     Stage stage = (Stage) node.getScene().getWindow();
-                    stage.setMaximized(true);
+                    stage.setMaximized(false);
                     stage.close();
                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/sample/views/RadnikView.fxml")));
                     stage.setTitle("Konobar");
@@ -156,11 +156,17 @@ public class LoginController implements Initializable {
                     this.name = korisnickoIme;
                     Korisnik logiraniKorisnik = new Korisnik(name,1);
                     NarudzbaController.logiraniKorisnik = logiraniKorisnik;
+                    StornoController.logiraniKorisnik = logiraniKorisnik;
+                    UpravljanjeOsobljemController.logiraniKorisnik = logiraniKorisnik;
+                    SkladisteController.logiraniKorisnik = logiraniKorisnik;
                     status = "Success Admin";
                 } else {
                     setLblError(Color.GREEN, "Login Successful for " +korisnickoIme+" as konobar..Redirecting..");
                     this.uloga = 0;
                     this.name = korisnickoIme;
+                    Korisnik logiraniKorisnik = new Korisnik(name,0);
+                    NarudzbaController.logiraniKorisnik = logiraniKorisnik;
+                    StornoController.logiraniKorisnik = logiraniKorisnik;
                 }
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());
