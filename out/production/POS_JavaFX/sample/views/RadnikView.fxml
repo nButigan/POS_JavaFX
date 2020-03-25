@@ -1,14 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.controllers.RadnikViewController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="618.0" prefWidth="943.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.RadnikViewController">
+   <children>
+      <Pane prefHeight="173.0" prefWidth="980.0" style="-fx-background-color: #2D75E8;">
+         <children>
+            <Label layoutX="123.0" layoutY="52.0" text="POS - JavaFX" textFill="WHITE">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Label layoutX="136.0" layoutY="105.0" text="Point of sale" textFill="WHITE">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <GridPane layoutX="165.0" layoutY="228.0" prefHeight="160.0" prefWidth="650.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnNarudzba" alignment="BASELINE_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="160.0" prefWidth="371.0" text="Nova narudžba" textAlignment="JUSTIFY">
+               <graphic>
+                  <ImageView fitHeight="97.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/order.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnStorno" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="160.0" prefWidth="393.0" text="Storniraj narudžbu" textAlignment="CENTER" GridPane.columnIndex="1">
+               <graphic>
+                  <ImageView fitHeight="97.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/storno.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnOdjava" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="160.0" prefWidth="654.0" text="Odjava" GridPane.columnIndex="2">
+               <graphic>
+                  <ImageView fitHeight="97.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/logout.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
 </AnchorPane>
