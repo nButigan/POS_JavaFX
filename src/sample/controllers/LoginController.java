@@ -159,6 +159,7 @@ public class LoginController implements Initializable {
                     StornoController.logiraniKorisnik = logiraniKorisnik;
                     UpravljanjeOsobljemController.logiraniKorisnik = logiraniKorisnik;
                     SkladisteController.logiraniKorisnik = logiraniKorisnik;
+                    PoslovanjeController.logiraniKorisnik = logiraniKorisnik;
                     status = "Success Admin";
                 } else {
                     setLblError(Color.GREEN, "Login Successful for " +korisnickoIme+" as konobar..Redirecting..");

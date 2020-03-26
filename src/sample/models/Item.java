@@ -11,6 +11,7 @@ public class Item {
         this.price = price;
     }
 
+    public Item(){}
     public void setName(String name) {
         this.name = name;
     }

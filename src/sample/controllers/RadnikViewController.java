@@ -56,7 +56,7 @@ public class RadnikViewController implements Initializable {
             stage.setScene(new Scene(root));
             stage.setMaximized(false);
 
-            stage.setTitle("Admin");
+            //stage.setTitle("POS");
             stage.getIcons().add(new Image("@../../images/point-of-sale-icon.png"));
             stage.initModality(Modality.APPLICATION_MODAL);
             /*stage.sizeToScene();*/

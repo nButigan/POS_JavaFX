@@ -1,6 +1,7 @@
 package sample.models;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableIntegerArray;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -11,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Racun {
@@ -33,6 +35,8 @@ public class Racun {
         this.id=id;
     }
 
+    public Racun(){}
+
     public int getId() {
         return id;
     }
@@ -47,6 +51,14 @@ public class Racun {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setDatum(Date datum) {
+        this.datum = datum;
+    }
+
+    public void setKorisnik(int korisnik) {
+        this.korisnik = korisnik;
     }
 
     public static Racun add(Racun racun) {
@@ -99,4 +111,5 @@ public class Racun {
             return false;
         }
     }
+
 }

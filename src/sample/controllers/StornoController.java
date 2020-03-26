@@ -57,7 +57,11 @@ public class StornoController implements Initializable {
     private void handleButtonClicks(javafx.event.ActionEvent mouseEvent) {
         if (mouseEvent.getSource() == btnOdustani) {
             closeCurrentWindows(mouseEvent);
-            loadStage("/sample/views/AdminView.fxml");
+            if(logiraniKorisnik.getUloga() == 1) {
+                loadStage("/sample/views/AdminView.fxml");
+            } else{
+                loadStage("/sample/views/RadnikView.fxml");
+            }
         }
     }
 
