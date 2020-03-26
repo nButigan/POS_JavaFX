@@ -2,6 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -13,11 +16,14 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1287.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.SkladisteController">
    <children>
-      <TableView fx:id="skladisteTablica" layoutY="172.0" onMouseClicked="#odaberiProizvod" prefHeight="594.0" prefWidth="554.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="733.0">
-        <columns>
-          <TableColumn fx:id="artiklNaziv" prefWidth="342.0" text="Artikl" />
-          <TableColumn fx:id="artiklKolicina" prefWidth="211.0" text="Kolicina" />
-        </columns>
+      <TableView fx:id="skladisteTablica" layoutY="172.0" onMouseClicked="#odaberiProizvod" prefHeight="594.0" prefWidth="598.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="689.0">
+         <columns>
+            <TableColumn fx:id="artiklNaziv" prefWidth="99.0" text="Artikl" />
+            <TableColumn fx:id="artiklDobavljac" prefWidth="105.0" text="Dobavljac" />
+            <TableColumn fx:id="artiklCijena" prefWidth="103.0" text="Cijena" />
+            <TableColumn fx:id="artiklKategorija" prefWidth="148.0" text="Kategorija" />
+            <TableColumn fx:id="artiklKolicina" prefWidth="141.0" text="Kolicina" />
+         </columns>
       </TableView>
       <Pane prefHeight="173.0" prefWidth="1287.0" style="-fx-background-color: #2D75E8;" AnchorPane.bottomAnchor="595.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -48,16 +54,31 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="601.0" layoutY="281.0" prefHeight="309.0" prefWidth="385.0">
+      <Pane layoutX="598.0" layoutY="172.0" prefHeight="568.0" prefWidth="385.0">
          <children>
-            <Button fx:id="btnOdustani" layoutX="213.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="60.0" prefWidth="135.0" text="Odustani" />
-            <Button fx:id="btnSpremi" layoutX="32.0" layoutY="235.0" mnemonicParsing="false" onAction="#spremiAction" prefHeight="60.0" prefWidth="135.0" text="Spremi" />
-            <TextField fx:id="txtKolicina" layoutX="32.0" layoutY="148.0" prefHeight="48.0" prefWidth="316.0" />
-            <Label layoutX="32.0" layoutY="112.0" text="Količina">
-               <font>
-                  <Font size="18.0" />
-               </font></Label>
-            <Label fx:id="lblAlert" layoutX="32.0" layoutY="204.0" prefHeight="21.0" prefWidth="316.0" />
+            <Button fx:id="btnOdustani" layoutX="204.0" layoutY="487.0" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="60.0" prefWidth="135.0" text="Odustani" />
+            <Button fx:id="btnSpremi" layoutX="14.0" layoutY="487.0" mnemonicParsing="false" onAction="#spremiAction" prefHeight="60.0" prefWidth="135.0" text="Spremi" />
+            <TextField fx:id="txtKolicina" layoutX="24.0" layoutY="321.0" prefHeight="3.0" prefWidth="149.0" />
+            <Label layoutX="26.0" layoutY="299.0" prefHeight="17.0" prefWidth="52.0" text="Količina" />
+            <Label fx:id="lblAlert" layoutX="33.0" layoutY="250.0" prefHeight="21.0" prefWidth="316.0" />
+            <TextField fx:id="txtNaziv" layoutX="24.0" layoutY="93.0" />
+            <TextField fx:id="txtDobavljaca" layoutX="24.0" layoutY="143.0" />
+            <TextField fx:id="txtCijena" layoutX="24.0" layoutY="195.0" />
+            <Label layoutX="24.0" layoutY="73.0" text="Naziv artikla" />
+            <Label layoutX="24.0" layoutY="124.0" text="Dobavljac" />
+            <Label layoutX="24.0" layoutY="177.0" text="Cijena" />
+            <MenuButton fx:id="dropKategorije" layoutX="24.0" layoutY="238.0" mnemonicParsing="false" onAction="#odabriKat" text="Kategorija">
+               <items>
+                  <MenuItem fx:id="topliNapitci" mnemonicParsing="false" onAction="#item1" text="Topli napitci" />
+                  <MenuItem fx:id="alkPica" mnemonicParsing="false" onAction="#item2" text="Alkoholna pica" />
+                  <MenuItem fx:id="gaziranaPica" mnemonicParsing="false" onAction="#item3" text="Gazirana pica" />
+                  <MenuItem fx:id="negaziranaPica" mnemonicParsing="false" onAction="#item4" text="Negazirana pica" />
+               </items>
+            </MenuButton>
+            <Button layoutX="26.0" layoutY="368.0" mnemonicParsing="false" onAction="#odaberiSliku" prefHeight="25.0" prefWidth="149.0" text="Odaberi sliku" />
+            <RadioButton fx:id="radioAzuriraj" layoutX="23.0" layoutY="24.0" mnemonicParsing="false" onAction="#actionRadioAzuriraj" text="Azuriraj Skladiste" />
+            <RadioButton fx:id="radioDodaj" layoutX="190.0" layoutY="24.0" mnemonicParsing="false" onAction="#actionRadioDodaj" text="Dodaj u skladiste" />
+            <ImageView fx:id="slikaArtikla" fitHeight="89.0" fitWidth="111.0" layoutX="204.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
    </children>
